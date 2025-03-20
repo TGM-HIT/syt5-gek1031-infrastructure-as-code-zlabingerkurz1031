@@ -1,11 +1,29 @@
-- name: Loadbalancer
-  hosts: 
-    - webserver1
-    - webserver2
-  tasks:
-    - name: Ping balancer
-      ansible.builtin.ping:
+- name: Webservers
+  hosts: Webserver
+  become: yes
 
-    - name: Print message
-      ansible.builtin.debug:
-        msg: Hello world
+  tasks:
+    - name: Install Apache and PHP
+      apt:
+        name:
+          - apache2
+          - libapache2-mod-php
+        state: present
+
+    - name: Enable Apache and PHP
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Create a PHP File to Display Server IP
+      template:
+        src: ip.php.j2
+        dest: /var/www/html/ip.php
+        mode: '0644'
+
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
+

@@ -1,0 +1,9 @@
+<?php
+
+if (in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '127.0.1.1'])) {
+    echo "Running on localhost.";
+} else {
+    echo "Running on a different IP: " . $_SERVER['SERVER_ADDR'];
+}
+
+?>
