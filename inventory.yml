@@ -1,0 +1,11 @@
+all:
+  hosts:
+    balancer:
+      ansible_host: 10.0.105.24
+    webserver1:
+      ansible_host: 10.0.105.78
+    webserver2:
+      ansible_host: 10.0.105.64
+
+  vars:
+    ansible_user: czlabinger

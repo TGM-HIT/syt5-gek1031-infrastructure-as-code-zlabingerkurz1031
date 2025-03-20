@@ -1,0 +1,11 @@
+- name: Loadbalancer
+  hosts: 
+    - webserver1
+    - webserver2
+  tasks:
+    - name: Ping balancer
+      ansible.builtin.ping:
+
+    - name: Print message
+      ansible.builtin.debug:
+        msg: Hello world

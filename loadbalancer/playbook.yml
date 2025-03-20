@@ -1,0 +1,9 @@
+- name: Loadbalancer
+  hosts: balancer
+  tasks:
+    - name: Ping balancer
+      ansible.builtin.ping:
+
+    - name: Print message
+      ansible.builtin.debug:
+        msg: Hello world
