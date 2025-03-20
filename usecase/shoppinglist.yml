@@ -1,0 +1,34 @@
+- name: Webservers Shoppinglist
+  hosts: Webserver
+  become: yes
+
+  tasks:
+
+    - name: Update and upgrade apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #One day
+
+    - name: Install apt dependencies
+      apt:
+        name:
+          - yarn
+          - git
+        state: present
+
+    - name: Clone shoppinglist
+      ansible.builtin.git:
+        repo: https://github.com/ibm-watson-data-lab/shopping-list-react-pouchdb
+        dest: /shoppinglist
+
+    - name: Install dependencies
+      community.general.yarn:
+        path: "/shoppinglist"
+
+    - name: Start Shoppinglist
+      shell: yarn install && yarn start &
+      args:
+        chdir: /shoppinglist
+        executable: /bin/bash
+

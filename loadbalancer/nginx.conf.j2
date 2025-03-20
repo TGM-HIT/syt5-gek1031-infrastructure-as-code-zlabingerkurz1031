@@ -6,7 +6,7 @@ http {
 
     upstream {{ upstream_name }} {
       {% for host in groups['Webserver'] %}
-      server {{ hostvars[host]['ansible_host'] }}:80;
+      server {{ hostvars[host]['ansible_host'] }}:8081;
       {% endfor %}
     }
 
